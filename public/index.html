@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<body>
+  <h2>Dice API Tester (Requirement 1)</h2>
+
+  <button onclick="hit('/api/health')">Test /api/health</button>
+  <button onclick="hit('/api/random?min=1&max=6')">Test /api/random</button>
+  <button onclick="hit('/api/random-nocors?min=1&max=6')">Test /api/random-nocors</button>
+
+  <pre id="out"></pre>
+
+  <script>
+    const out = document.getElementById("out");
+    async function hit(path) {
+      out.textContent = "Loading...";
+      try {
+        const r = await fetch(path);
+        const j = await r.json();
+        out.textContent = JSON.stringify(j, null, 2);
+      } catch (e) {
+        out.textContent = "ERROR: " + e;
+      }
+    }
+  </script>
+</body>
+</html>
